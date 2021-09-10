@@ -1,0 +1,11 @@
+[Unit]
+Description=BFT Smart Service
+After=network.target
+
+[Service]
+Type=forking
+EnvironmentFile=-/srv/emulab/bft-smart.env
+ExecStart=/bin/bash java -cp /srv/BFT-SMaRt-parallel-cp/target/BFT-SMaRt-parallel-cp-1.0-SNAPSHOT.jar demo.bftmap.BFTMapServerMP $NODEID $INTERVAL $THREADS $INITIAL_ENTRIES $CHECKPOINT_INTERVAL $PARALLEL
+
+[Install]
+WantedBy=multi-user.target
