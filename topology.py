@@ -49,7 +49,7 @@ node_offset = 100
 def raw_machine(lan, node_name, node_id, node_ip, params, node_offset):
     node = request.RawPC(node_name)
     node.hardware_type = params.t
-    node.disk_image = 'urn:publicid:IDN+emulab.net+image+ScalableSMR:BFT-SMaRt-PCheckpoint'
+    node.disk_image = 'urn:publicid:IDN+emulab.net+image+ScalableSMR:parallel-checkpoint'
     iface = node.addInterface('eth0', pg.IPv4Address(node_ip, '255.255.255.0'))
     iface.bandwidth = 10000000
     lan.addInterface(iface)
@@ -64,7 +64,6 @@ def raw_machine(lan, node_name, node_id, node_ip, params, node_offset):
         ip_offset=node_offset
     )))
 
-    node.addService(pg.Execute(shell='bash', command='sudo mv /srv/emulab/config/system.config /srv/config/system.config'))
     node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab/generate_system_config_initial_view.sh {num_nodes} {node_offset}'.format(
         num_nodes=params.n,
         node_offset=node_offset
