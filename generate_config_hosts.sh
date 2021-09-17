@@ -8,6 +8,9 @@ IP_OFFSET=${3}
 # network device, we use an offset like 100 so the ip address list start
 # from .100
 
+
+truncate -s 0 /srv/config/hosts.config #clear the hosts file
+
 for i in $(seq 0 $((NUM_NODES - 1))); do
     node_id=$((i+IP_OFFSET))
     sudo echo -e "${node_id} 10.1.1.${node_id} ${PORT}" >> /srv/config/hosts.config
