@@ -9,10 +9,10 @@ the bft-smart checkpointing experiments.
 
 # Import the Portal object.
 import geni.portal as portal
-# Import the ProtoGENI library.
-import geni.rspec.pg as pg
 # Import the Emulab specific extensions.
 import geni.rspec.emulab as emulab
+# Import the ProtoGENI library.
+import geni.rspec.pg as pg
 
 # Create a portal object,
 pc = portal.Context()
@@ -21,6 +21,7 @@ pc = portal.Context()
 request = pc.makeRequestRSpec()
 request.setRoutingStyle('static')
 
+portal.context.defineParameter("u", "Your emulab username", portal.ParameterType.STRING, 'hensg')
 portal.context.defineParameter("n", "Number of machines", portal.ParameterType.INTEGER, 4)
 portal.context.defineParameter("t", "Type of machines", portal.ParameterType.STRING, 'd430')
 portal.context.defineParameter("ri", "Report Interval", portal.ParameterType.INTEGER, 1)
@@ -30,6 +31,8 @@ portal.context.defineParameter("ci", "Checkpoint interval in number of commands"
 portal.context.defineParameter("p", "Should use parallel checkpointing?", portal.ParameterType.BOOLEAN, False)
 
 params = portal.context.bindParameters()
+
+
 if params.n < 1 or params.n > 36:
     portal.context.reportError(portal.ParameterError("You must choose at least 1 and no more than 36 machines."))
 
@@ -72,7 +75,8 @@ def raw_machine(lan, node_name, node_id, node_ip, params, node_offset):
     node.addService(pg.Execute(shell='bash', command='sudo rm /srv/config/currentView'))
     node.addService(pg.Execute(
         shell='bash',
-        command='sudo /srv/emulab/install_service.sh {id} {interval} {threads} {initial_entries} {checkpoint_interval} {parallel}'.format(
+        command='sudo /srv/emulab/install_service.sh {username} {id} {interval} {threads} {initial_entries} {checkpoint_interval} {parallel}'.format(
+            username=params.u,
             id=node_id,
             interval=params.ri,
             threads=params.th,
