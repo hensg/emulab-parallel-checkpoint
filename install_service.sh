@@ -17,7 +17,7 @@ sudo chmod 777 /var/log/bft-smart
 sudo chown -R $USERNAME /var/log/bft-smart
 sudo chown -R $USERNAME /srv/
 
-ENV_FILE_PATH=/srv/emulab/bft-smart.service
+ENV_FILE_PATH=/srv/emulab-parallel-checkpoint/bft-smart.service
 
 sudo sed -i "s/=NODE_ID=/=NODE_ID=${NODE_ID}/g" $ENV_FILE_PATH
 sudo sed -i "s/=INTERVAL=/=INTERVAL=${INTERVAL}/g" $ENV_FILE_PATH
