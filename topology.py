@@ -28,6 +28,7 @@ portal.context.defineParameter("ri", "Report Interval", portal.ParameterType.INT
 portal.context.defineParameter("th", "Number of threads", portal.ParameterType.INTEGER, 4)
 portal.context.defineParameter("ie", "Number of initial entries in size (MB)", portal.ParameterType.INTEGER, 1024)
 portal.context.defineParameter("ci", "Checkpoint interval in number of commands", portal.ParameterType.INTEGER, 50000)
+portal.context.defineParameter("nd", "Number of disks", portal.ParameterType.INTEGER, 2)
 portal.context.defineParameter("p", "Should use parallel checkpointing?", portal.ParameterType.BOOLEAN, False)
 
 params = portal.context.bindParameters()
@@ -75,14 +76,15 @@ def raw_machine(lan, node_name, node_id, node_ip, params, node_offset):
     node.addService(pg.Execute(shell='bash', command='sudo rm /srv/config/currentView'))
     node.addService(pg.Execute(
         shell='bash',
-        command='sudo /srv/emulab-parallel-checkpoint/install_service.sh {username} {id} {interval} {threads} {initial_entries} {checkpoint_interval} {parallel}'.format(
+        command='sudo /srv/emulab-parallel-checkpoint/install_service.sh {username} {id} {interval} {threads} {initial_entries} {checkpoint_interval} {parallel} {num_disks}'.format(
             username=params.u,
             id=node_id,
             interval=params.ri,
             threads=params.th,
             initial_entries=params.ie,
             checkpoint_interval=params.ci,
-            parallel=params.p
+            parallel=params.p,
+            num_disks=params.nd,
     )))
 
 for i in range(params.n):

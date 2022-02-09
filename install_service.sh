@@ -10,6 +10,7 @@ THREADS=${4}
 INITIAL_ENTRIES=${5}
 CHECKPOINT_INTERVAL=${6}
 PARALLEL=${7}
+PARALLEL=${8}
 
 # create logging directory
 sudo mkdir -p /var/log/bft-smart/
@@ -25,6 +26,7 @@ sudo sed -i "s/=THREADS=/=THREADS=${THREADS}/g" $ENV_FILE_PATH
 sudo sed -i "s/=INITIAL_ENTRIES=/=INITIAL_ENTRIES=${INITIAL_ENTRIES}/g" $ENV_FILE_PATH
 sudo sed -i "s/=CHECKPOINT_INTERVAL=/=CHECKPOINT_INTERVAL=${CHECKPOINT_INTERVAL}/g" $ENV_FILE_PATH
 sudo sed -i "s/=PARALLEL=/=PARALLEL=${PARALLEL}/g" $ENV_FILE_PATH
+sudo sed -i "s/=NUM_DISKS=/=NUM_DISKS=${NUM_DISKS}/g" $ENV_FILE_PATH
 
 sudo mv /srv/emulab-parallel-checkpoint/bft-smart.service /etc/systemd/system/
 
