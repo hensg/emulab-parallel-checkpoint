@@ -57,8 +57,8 @@ def raw_machine(lan, node_name, node_id, node_ip, params, node_offset):
     iface.bandwidth = 10000000
     lan.addInterface(iface)
 
-    node.addService(pg.Install(url="https://github.com/hensg/bft-smart-emulab/releases/download/1.0/bft-smart.tar.gz", path="/srv"))
-    node.addService(pg.Install(url="https://github.com/hensg/bft-smart-emulab/releases/download/1.0/emulab.tar.gz", path="/srv"))
+    node.addService(pg.Install(url="https://github.com/hensg/emulab-parallel-checkpoint/releases/download/1.0/bft-smart.tar.gz", path="/srv"))
+    node.addService(pg.Install(url="https://github.com/hensg/emulab-parallel-checkpoint/releases/download/1.0/emulab.tar.gz", path="/srv"))
     node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab-parallel-checkpoint/mount_disks.sh'))
     node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab-parallel-checkpoint/install_dependencies.sh'))
     node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab-parallel-checkpoint/generate_config_hosts.sh {num_nodes} {port} {ip_offset}'.format(
