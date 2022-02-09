@@ -26,7 +26,7 @@ sudo sed -i "s/=INITIAL_ENTRIES=/=INITIAL_ENTRIES=${INITIAL_ENTRIES}/g" $ENV_FIL
 sudo sed -i "s/=CHECKPOINT_INTERVAL=/=CHECKPOINT_INTERVAL=${CHECKPOINT_INTERVAL}/g" $ENV_FILE_PATH
 sudo sed -i "s/=PARALLEL=/=PARALLEL=${PARALLEL}/g" $ENV_FILE_PATH
 
-sudo mv /srv/emulab/bft-smart.service /etc/systemd/system/
+sudo mv /srv/emulab-parallel-checkpoint/bft-smart.service /etc/systemd/system/
 
 systemctl enable bft-smart
 systemctl start bft-smart

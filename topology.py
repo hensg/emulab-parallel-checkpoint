@@ -59,15 +59,15 @@ def raw_machine(lan, node_name, node_id, node_ip, params, node_offset):
 
     node.addService(pg.Install(url="https://github.com/hensg/bft-smart-emulab/releases/download/1.0/bft-smart.tar.gz", path="/srv"))
     node.addService(pg.Install(url="https://github.com/hensg/bft-smart-emulab/releases/download/1.0/emulab.tar.gz", path="/srv"))
-    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab/mount_disks.sh'))
-    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab/install_dependencies.sh'))
-    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab/generate_config_hosts.sh {num_nodes} {port} {ip_offset}'.format(
+    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab-parallel-checkpoint/mount_disks.sh'))
+    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab-parallel-checkpoint/install_dependencies.sh'))
+    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab-parallel-checkpoint/generate_config_hosts.sh {num_nodes} {port} {ip_offset}'.format(
         num_nodes=params.n,
         port=11000,
         ip_offset=node_offset
     )))
 
-    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab/generate_system_config_initial_view.sh {num_nodes} {node_offset}'.format(
+    node.addService(pg.Execute(shell='bash', command='sudo /srv/emulab-parallel-checkpoint/generate_system_config_initial_view.sh {num_nodes} {node_offset}'.format(
         num_nodes=params.n,
         node_offset=node_offset
     )))
@@ -75,7 +75,7 @@ def raw_machine(lan, node_name, node_id, node_ip, params, node_offset):
     node.addService(pg.Execute(shell='bash', command='sudo rm /srv/config/currentView'))
     node.addService(pg.Execute(
         shell='bash',
-        command='sudo /srv/emulab/install_service.sh {username} {id} {interval} {threads} {initial_entries} {checkpoint_interval} {parallel}'.format(
+        command='sudo /srv/emulab-parallel-checkpoint/install_service.sh {username} {id} {interval} {threads} {initial_entries} {checkpoint_interval} {parallel}'.format(
             username=params.u,
             id=node_id,
             interval=params.ri,
