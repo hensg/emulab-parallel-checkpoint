@@ -10,9 +10,10 @@ Environment=INITIAL_ENTRIES=
 Environment=CHECKPOINT_INTERVAL=
 Environment=PARALLEL=
 Environment=NUM_DISKS=
+Environment=MEMORY=
 Type=simple
 WorkingDirectory=/srv/
-ExecStart=/usr/bin/java -Xmx4096m -cp /srv/BFT-SMaRt-parallel-cp-1.0-SNAPSHOT.jar demo.bftmap.BFTMapServerMP $NODE_ID $INTERVAL $THREADS $INITIAL_ENTRIES $CHECKPOINT_INTERVAL $PARALLEL $NUM_DISKS
+ExecStart=/usr/bin/java -Xms${MEMORY}g -Xmx${MEMORY}g -cp /srv/BFT-SMaRt-parallel-cp-1.0-SNAPSHOT.jar demo.bftmap.BFTMapServerMP $NODE_ID $INTERVAL $THREADS $INITIAL_ENTRIES $CHECKPOINT_INTERVAL $PARALLEL $NUM_DISKS
 
 [Install]
 WantedBy=multi-user.target
