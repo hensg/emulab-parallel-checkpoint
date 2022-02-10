@@ -10,7 +10,7 @@ THREADS=${4}
 INITIAL_ENTRIES=${5}
 CHECKPOINT_INTERVAL=${6}
 PARALLEL=${7}
-PARALLEL=${8}
+NUM_DISKS=${8}
 
 # create logging directory
 sudo mkdir -p /var/log/bft-smart/
